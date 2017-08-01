@@ -3,23 +3,25 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Javascript-ES6 | Continuous Development</title>
+    <title>Javascript-ES6 part 1 | Continuous Development</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
         <meta name="keywords" content="Javascript,ES6" />
     
-    <meta name="description" content="Java, Spring, JPA, Javascript, MicroServices Architecture">
+    <meta name="description" content="let, const기존 ES5에서는 변수를 선언할 때 var 키워드를 사용하였다.그러나 var의 경우 전역변수로 간주되거나 의도치 않게 중복된 변수 선언을 한다던가변수 호이스팅(Variable Hoisting)이 일어나 변수를 선언하기 전에 참조가 가능한 문제가 발생하게 된다. 이 때문에 예기치 못한 참조나 의존으로 인한 side effect이 있어 복잡">
 <meta name="keywords" content="Javascript,ES6">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Javascript-ES6">
+<meta property="og:title" content="Javascript-ES6 part 1">
 <meta property="og:url" content="https://gliderwiki.github.io/2017/08/01/Javascript-ES6/index.html">
 <meta property="og:site_name" content="Continuous Development">
-<meta property="og:description" content="Java, Spring, JPA, Javascript, MicroServices Architecture">
+<meta property="og:description" content="let, const기존 ES5에서는 변수를 선언할 때 var 키워드를 사용하였다.그러나 var의 경우 전역변수로 간주되거나 의도치 않게 중복된 변수 선언을 한다던가변수 호이스팅(Variable Hoisting)이 일어나 변수를 선언하기 전에 참조가 가능한 문제가 발생하게 된다. 이 때문에 예기치 못한 참조나 의존으로 인한 side effect이 있어 복잡">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-08-01T14:11:35.000Z">
+<meta property="og:image" content="https://gliderwiki.github.io/images/js/es6/es6.jpeg">
+<meta property="og:updated_time" content="2017-08-01T20:14:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Javascript-ES6">
-<meta name="twitter:description" content="Java, Spring, JPA, Javascript, MicroServices Architecture">
+<meta name="twitter:title" content="Javascript-ES6 part 1">
+<meta name="twitter:description" content="let, const기존 ES5에서는 변수를 선언할 때 var 키워드를 사용하였다.그러나 var의 경우 전역변수로 간주되거나 의도치 않게 중복된 변수 선언을 한다던가변수 호이스팅(Variable Hoisting)이 일어나 변수를 선언하기 전에 참조가 가능한 문제가 발생하게 된다. 이 때문에 예기치 못한 참조나 의존으로 인한 side effect이 있어 복잡">
+<meta name="twitter:image" content="https://gliderwiki.github.io/images/js/es6/es6.jpeg">
     
 
     
@@ -141,7 +143,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-        Javascript-ES6
+        Javascript-ES6 part 1
         </h1>
     
 
@@ -166,7 +168,26 @@
         
         
         <div class="article-entry" itemprop="articleBody">
-            
+            <p><img src="/images/js/es6/es6.jpeg" alt="ECMAScript 6" title="ES6"></p>
+<h2 id="let-const"><a href="#let-const" class="headerlink" title="let, const"></a>let, const</h2><p>기존 ES5에서는 변수를 선언할 때 var 키워드를 사용하였다.<br>그러나 var의 경우 전역변수로 간주되거나 의도치 않게 중복된 변수 선언을 한다던가<br>변수 호이스팅(Variable Hoisting)이 일어나 변수를 선언하기 전에 참조가 가능한 문제가 발생하게 된다.</p>
+<p>이 때문에 예기치 못한 참조나 의존으로 인한 side effect이 있어 복잡도가 증가하기 때문에 var의 단점을 보완한 let과 const 라는 키워드를 정의하였다.</p>
+<h4 id="let"><a href="#let" class="headerlink" title="let"></a>let</h4><p>let은 Block-level scope를 갖는다. 코드 블럭 외부에서 참조할 경우 ReferenceError 가 발생한다.<br>또한 let으로 선언된 변수를 중복해서 선언할 경우 Syntax에러가 발생한다. </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> global = <span class="string">"abc"</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">variable</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> local = <span class="string">"123"</span>;</div><div class="line">  </div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'local : '</span> + local); <span class="comment">// 123</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">variable();</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'global : '</span> + global);  <span class="comment">// abc </span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'window.global : '</span> + global); <span class="comment">// abc </span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'local : '</span> + local);  <span class="comment">// ReferenceError: local is not defined</span></div><div class="line"><span class="string">``</span><span class="string">` </span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">이와 같이 블럭 외부에서 참조할 경우 레퍼런스 에러가 발생하는 것을 확인할 수 있다. </span></div><div class="line"><span class="string">전역적 값을 갖는 변수로 인한 문제를 해결하기 위해 지역 변수의 스코프를 갖는 동시에 중복선언이 되지 않기 때문에 가급적 코드 블럭 내에서는 let을 이용하여 변수를 선언하는게 좋다. </span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">### const </span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">변하지 않는 값을 위해 사용하는데, let과 비슷하지만 const는 초기화 이후 재할당이 금지 된다. </span></div><div class="line"><span class="string">또한 선언과 동시에 초기화를 해주어야 한다. 그렇지 않을 경우 아래와 같은 에러가 발생한다.</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">`</span><span class="built_in">SyntaxError</span>: Missing initializer <span class="keyword">in</span> <span class="keyword">const</span> declaration<span class="string">` </span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">const가 재할당을 할수 없다고는 하나 객체 리터럴의 경우 값의 추가 혹은 할당된 객체의 내용은 변경할 수 있다. </span></div><div class="line"><span class="string">객체 리터럴의 경우 const에 지정된 주소값의 변경이 되지 않는것이지 객체의 프로퍼티 값은 변경이 가능하다. </span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">`</span><span class="string">``</span>javascript</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myList</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> list = [<span class="string">"java"</span>, <span class="string">"javascript"</span>, <span class="string">"mysql"</span>];</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'list = '</span> + list); <span class="comment">// java,javascript,mysql</span></div><div class="line">  </div><div class="line">  list.push(<span class="string">"node"</span>);</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'push list = '</span> + list); <span class="comment">// java,javascript,mysql,node</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">myList();</div></pre></td></tr></table></figure>
+<h2 id="Template-Literal"><a href="#Template-Literal" class="headerlink" title="Template Literal"></a>Template Literal</h2><p>백틱 문자 ` 를 이용한 멀티 라인 지원과 값 내의 이스케이프 문자열 치환을 해결하였다. </p>
+<h2 id="Spread-Operator"><a href="#Spread-Operator" class="headerlink" title="Spread Operator"></a>Spread Operator</h2><h2 id="Destructuring"><a href="#Destructuring" class="headerlink" title="Destructuring"></a>Destructuring</h2><h2 id="Map-WeakMap"><a href="#Map-WeakMap" class="headerlink" title="Map, WeakMap"></a>Map, WeakMap</h2><p>Map은 Key와 Value을 서로 연결(매핑)시켜 저장하며 저정된 순서대로 각 요소들을 반복적으로 접근할 수 있도록 한다. </p>
+<blockquote>
+<p><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Map" target="_blank" rel="external">Map API 확인하기</a> </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> myMap = <span class="keyword">new</span> <span class="built_in">Map</span>([</div><div class="line">      [<span class="string">'key1'</span> , <span class="string">'value1'</span>],</div><div class="line">      [<span class="string">'key2'</span> , <span class="string">'value2'</span>]</div><div class="line">]);</div></pre></td></tr></table></figure>
+<h2 id="Set-WeakSet"><a href="#Set-WeakSet" class="headerlink" title="Set, WeakSet"></a>Set, WeakSet</h2><h4 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h4><p>Set운 중복을 허용하지 않는 값들의 집합이다. 입력된 순서에따라 저장된 요소를 반복처리할 수 있다.<br>또한 배열과 달리 delete 메소드를 이용하여 요소의 값을 삭제할 수 있으며, indexOf 메소드로 값을 확인하는것 보다 has 가 더 빠르다</p>
+<blockquote>
+<p><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Set" target="_blank" rel="external">Set Api 확인하기</a> </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> mySet = <span class="keyword">new</span> <span class="built_in">Set</span>();</div><div class="line">mySet.add(<span class="string">"1st"</span>);</div><div class="line">mySet.add(<span class="string">"2nd"</span>);</div><div class="line">mySet.add(<span class="string">"3rd"</span>);</div><div class="line"></div><div class="line">mySet.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"value = "</span> + value);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>순차적으로 값이 출력되는 것을 확인 할 수 있다.</p>
+<p>Set 내부에 특정한 값이 존재하는지 체크하려면 아래와 같다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (mySet.has(<span class="string">"1st"</span>)) &#123;</div><div class="line">... </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Set 내부의 값을 삭제하려면 delete 메소드를 이용한다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mySet.delete(<span class="string">"1st"</span>);</div></pre></td></tr></table></figure></p>
+<h4 id="WeakSet"><a href="#WeakSet" class="headerlink" title="WeakSet"></a>WeakSet</h4>
         </div>
         <footer class="article-footer">
             
@@ -305,6 +326,26 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2017/08/02/Javascript-ES6-part-2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/js/es6/es6.jpeg)" alt="Javascript-ES6 part 2" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Front/">Front</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Front/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2017/08/02/Javascript-ES6-part-2/" class="title">Javascript-ES6 part 2</a></p>
+                            <p class="item-date"><time datetime="2017-08-01T20:13:11.000Z" itemprop="datePublished">2017-08-02</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2017/08/01/AWS/" class="thumbnail">
     
     
@@ -348,7 +389,7 @@
                             <a href="/2017/08/01/Javascript-ES6/" class="thumbnail">
     
     
-        <span class="thumbnail-image thumbnail-none"></span>
+        <span style="background-image:url(/images/js/es6/es6.jpeg)" alt="Javascript-ES6 part 1" class="thumbnail-image"></span>
     
     
 </a>
@@ -357,7 +398,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/Front/">Front</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Front/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/2017/08/01/Javascript-ES6/" class="title">Javascript-ES6</a></p>
+                            <p class="item-title"><a href="/2017/08/01/Javascript-ES6/" class="title">Javascript-ES6 part 1</a></p>
                             <p class="item-date"><time datetime="2017-08-01T08:30:34.000Z" itemprop="datePublished">2017-08-01</time></p>
                         </div>
                     </li>
@@ -391,7 +432,7 @@
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Front/">Front</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Front/Javascript/">Javascript</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Infra/">Infra</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Infra/AWS/">AWS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Server/">Server</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Server/Java/">Java</a><span class="category-list-count">1</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Front/">Front</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Front/Javascript/">Javascript</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Infra/">Infra</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Infra/AWS/">AWS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Server/">Server</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Server/Java/">Java</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -401,7 +442,7 @@
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">4</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">5</span></li></ul>
         </div>
     </div>
 
@@ -411,7 +452,7 @@
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/">Java8</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lambda/">Lambda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stream/">Stream</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/">Java8</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lambda/">Lambda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stream/">Stream</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -421,7 +462,7 @@
     <div class="widget-wrap widget-float">
         <h3 class="widget-title">tag cloud</h3>
         <div class="widget tagcloud">
-            <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/Java8/" style="font-size: 10px;">Java8</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Lambda/" style="font-size: 10px;">Lambda</a> <a href="/tags/Stream/" style="font-size: 10px;">Stream</a>
+            <a href="/tags/ES6/" style="font-size: 20px;">ES6</a> <a href="/tags/Java8/" style="font-size: 10px;">Java8</a> <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/Lambda/" style="font-size: 10px;">Lambda</a> <a href="/tags/Stream/" style="font-size: 10px;">Stream</a>
         </div>
     </div>
 
