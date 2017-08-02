@@ -21,7 +21,9 @@ tags: [Javascript, ES6]
 let은 Block-level scope를 갖는다. 코드 블럭 외부에서 참조할 경우 ReferenceError 가 발생한다. 
 또한 let으로 선언된 변수를 중복해서 선언할 경우 Syntax에러가 발생한다. 
 
-```javascript
+ 
+{% codeblock lang:javascript Example %}
+
 var global = "abc";
 function variable() {
   let local = "123";
@@ -34,10 +36,15 @@ variable();
 console.log('global : ' + global);  // abc 
 console.log('window.global : ' + global); // abc 
 console.log('local : ' + local);  // ReferenceError: local is not defined
-``` 
+
+{% endcodeblock %}
+
+
 
 이와 같이 블럭 외부에서 참조할 경우 레퍼런스 에러가 발생하는 것을 확인할 수 있다. 
 전역적 값을 갖는 변수로 인한 문제를 해결하기 위해 지역 변수의 스코프를 갖는 동시에 중복선언이 되지 않기 때문에 가급적 코드 블럭 내에서는 let을 이용하여 변수를 선언하는게 좋다. 
+
+
 
 ### const 
 
@@ -64,13 +71,50 @@ myList();
 
 ## Template Literal
 백틱 문자 ` 를 이용한 멀티 라인 지원과 값 내의 이스케이프 문자열 치환을 해결하였다. 
+JSON 문자열을 파싱한 후 DOM 에 렌더링 할 때 쌍 따옴표나 홑따옴표로 이스케이프 문자열을 처리할 때를 생각해보자.
+이 때 불편한점은 문자열처리와 변수를 결합할 때 이스케이프 문자열의 오류 처리에 많은 집중을 해야 한다.
 
+이 때 변수들의 처리를  `${변수명}` 과 같은 형태로 처리할 수 있으며 이를 Template Literal 이라고 한다.
+
+아래의 예제를 JSBin 이나 console을 통해 실행해보자. 
+
+```javascript
+
+const data = [
+    {
+        name: 'gildong',
+        email: 'gildong@gmail.com',
+        age : 30
+    },        
+    {
+        name: 'john doe',
+        email: 'johndoe@gmail.com',
+        age : 32
+    }             
+]
+
+const template = `이름은 ${data[1].name} 이고, 나이는 ${data[1].age} 입니다.`;
+
+console.log(template);
+
+```
+
+결과값은 
+> "이름은 john doe 이고, 나이는 32 입니다."
+라고 출력되는 것을 확인 할 수 있다.
+
+백틱문자는 여러 라인으로 작성할 수 있고, 내부에 HTML 태그 또한 작성할 수 있다. 
+이를 활용하여 document의 DOM에 HTML Tag 가 포함된 template 리터럴을 쉽게 추가해줄 수 있다.  
+
+기존의 javascript 에서는 
 
 ## Spread Operator 
 
 ## Destructuring 
 
 ## Map, WeakMap 
+
+#### Map 
 
 Map은 Key와 Value을 서로 연결(매핑)시켜 저장하며 저정된 순서대로 각 요소들을 반복적으로 접근할 수 있도록 한다. 
  
@@ -85,6 +129,11 @@ let myMap = new Map([
 ```
 
 
+#### WeakMap 
+
+```javascript
+
+```
 
 ## Set, WeakSet
 
